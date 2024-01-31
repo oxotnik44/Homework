@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
+import { StyleSheet, View } from "react-native";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import React, { useEffect } from "react";
+import AddHomeWork from "./components/AddHomeWork/AddHomeWork";
+import { RootStackParamList } from "./Navigate";
+import { StackNavigationProp } from "@react-navigation/stack";
+import Navigate from "./Navigate";
+import { loadHomeWorkStorage } from "./SavedHomeWork/SavedHomeWork";
+import { useAppDispatch } from "./hooks";
+type GroupsProps = {
+  navigation: StackNavigationProp<RootStackParamList>;
+};
+const App = ({ navigation }: GroupsProps): JSX.Element => {
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Navigate navigation={navigation} />
+    </Provider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#2b456d",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
+export default App;
